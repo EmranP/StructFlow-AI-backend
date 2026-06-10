@@ -28,7 +28,7 @@ type Config struct {
 	SmtpPassword string
 
 	JWTSecret string
-	// OriginUrl string
+	OriginUrl string
 }
 
 func Load() (*Config, error) {
@@ -44,9 +44,9 @@ func Load() (*Config, error) {
 	}
 
 	return &Config{
-		ENV:     os.Getenv("ENV"),
-		AppPort: os.Getenv("APP_PORT"),
-		// OriginUrl: os.Getenv("CLIENT_URL"),
+		ENV:       os.Getenv("ENV"),
+		AppPort:   os.Getenv("APP_PORT"),
+		OriginUrl: os.Getenv("CLIENT_URL"),
 
 		DBHost: os.Getenv("DB_HOST"),
 		DBPort: os.Getenv("DB_PORT"),

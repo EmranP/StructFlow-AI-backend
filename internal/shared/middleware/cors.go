@@ -7,9 +7,17 @@ import (
 )
 
 func CORS(cfg *configs.Config) fiber.Handler {
+	var originUrl string
+
+	if cfg.ENV == "development" {
+		originUrl = "*"
+	} else {
+		originUrl = cfg.OriginUrl
+	}
+
 	return cors.New(
 		cors.Config{
-			AllowOrigins: "https://struct-flow-hz30vto0q-emrans-projects-7ea478d6.vercel.app",
+			AllowOrigins: originUrl,
 
 			AllowMethods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
 
