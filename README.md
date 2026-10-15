@@ -21,13 +21,11 @@
 ## 📋 Table of Contents
 
 - [About](#-about)
+- [Setups](#️-setups)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
-- [Getting Started](#-getting-started)
+- [Architecture](#-architecture)
   - [Prerequisites](#prerequisites)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
-  - [Environment Variables](#environment-variables)
 - [Database Schema](#-database-schema)
 
 ---
@@ -50,7 +48,7 @@ Describe your project in plain text → StructFlow generates 3 ready-to-use dire
 
 ---
 
-### Setups
+## ⚙️ Setups
 
 ```bash
 # Clone the repository
@@ -75,14 +73,14 @@ go run cmd/main.go || air
 
 **With Docker:**
 
-#### Step 1
+### Step 1
 
 ```bash
 # Run database migrations
 make migrate-up
 ```
 
-#### Step 2
+### Step 2
 
 ```bash
 make up # or make up-d (background running)
@@ -99,9 +97,9 @@ The service is deployed in Docker for convenient database management. **pgAdmin*
    - **Email:** `PGADMIN_EMAIL` (`pgadmin@admin.com`)
    - **Password:** `PGADMIN_PASS` (`12345`)
 3. To add a database, click **Add New Server**:
-   - **Вкладка General:**
+   - **Tab General:**
      - **Name:** `SF-AI-DB` (any name)
-   - **Вкладка Connection:**
+   - **Tab Connection:**
      - **Host name/address:** `db` (name services PostgreSQL in the docker-network)
      - **Port:** `5432`
      - **Maintenance database:** `sf-ai-db` (value `POSTGRES_DB`)
@@ -161,7 +159,7 @@ If you want to connect to the database directly from your local machine via a th
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Architecture
 
 ### Prerequisites
 
