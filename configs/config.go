@@ -46,15 +46,15 @@ func Load() (*Config, error) {
 
 	return &Config{
 		ENV:       os.Getenv("ENV"),
-		AppPort:   os.Getenv("APP_PORT"),
+		AppPort:   os.Getenv("PORT"),
 		Host:      os.Getenv("HOSTNAME"),
 		OriginUrl: os.Getenv("CLIENT_URL"),
 
-		DBHost: os.Getenv("DB_HOST"),
-		DBPort: os.Getenv("DB_PORT"),
-		DBUser: os.Getenv("DB_USER"),
-		DBPass: os.Getenv("DB_PASS"),
-		DBName: os.Getenv("DB_NAME"),
+		DBHost: os.Getenv("POSTGRES_HOST"),
+		DBPort: os.Getenv("POSTGRES_PORT"),
+		DBUser: os.Getenv("POSTGRES_USER"),
+		DBPass: os.Getenv("POSTGRES_PASSWORD"),
+		DBName: os.Getenv("POSTGRES_DB"),
 		DBUrl:  os.Getenv("DB_URL"),
 
 		AIGeminiKey:  os.Getenv("API_AI_GEMINI_KEY"),

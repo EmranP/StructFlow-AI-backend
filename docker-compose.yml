@@ -61,6 +61,8 @@ services:
       - '${SWAGGER_PORT}:${SWAGGER_PORT}'
     environment:
       SWAGGER_JSON: /docs/openapi.yaml
+      SWAGGER_FILE: /docs/openapi.yaml
+      PORT: '${SWAGGER_PORT}'
     networks:
       - sf-ai-net
     volumes:
@@ -84,3 +86,4 @@ services:
 networks:
   sf-ai-net:
     driver: bridge
+    name: sf-ai-net

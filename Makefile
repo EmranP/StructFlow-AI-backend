@@ -5,8 +5,6 @@ endif
 
 export PROJECT_ROOT=$(shell pwd)
 
-DB_URL ?= postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
-MIGRATIONS_PATH ?= ./migrations
 
 # App
 
@@ -39,11 +37,20 @@ clear:
 		echo "Operation cancelled."; \
 	fi;
 
-migrate-up:
-	@echo "Using DB_URL: $(DB_URL)"
+migrate-l-up:
+	@echo "Using DB_URL: $(LOCAL_DB_URL)"
 	@echo "Running up migrations..."
 	@docker run --rm --network sf-ai-net \
 		-v $(PROJECT_ROOT)/$(MIGRATIONS_PATH):/migrations \
+		migrate/migrate \
+		-path=/migrations/ \
+		-database "$(LOCAL_DB_URL)" up
+
+migrate-up:
+	@echo "Using DB_URL: $(DB_URL)"
+	@echo "Running up migrations $(PROJECT_ROOT)/$(MIGRATIONS_PATH)..."
+	@docker run --rm --network sf-ai-net \
+		-v $(PROJECT_ROOT)/migrations:/migrations \
 		migrate/migrate \
 		-path=/migrations/ \
 		-database "$(DB_URL)" up
