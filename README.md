@@ -50,6 +50,77 @@ Describe your project in plain text → StructFlow generates 3 ready-to-use dire
 
 ---
 
+### Setups
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/structflow.git
+cd structflow/backend
+
+# Install dependencies
+go mod download
+
+# Copy environment config
+cp .env.example .env
+# Edit .env with your values
+
+# Run database migrations
+make migrate-up
+
+# Start the server
+make run
+# or
+go run cmd/main.go || air
+```
+
+**With Docker:**
+
+#### Step 1
+
+```bash
+# Run database migrations
+make migrate-up
+```
+
+#### Step 2
+
+```bash
+make up # or make up-d (background running)
+```
+
+### Work with DB (pgAdmin and GUI)
+
+### 1. Web-UI pgAdmin (Docker)
+
+The service is deployed in Docker for convenient database management. **pgAdmin**.
+
+1. Open a browser and navigate to: [http://localhost:**port-pgadmin**](http://localhost:port-pgadmin)
+2. Log in using the data from the file `.env`:
+   - **Email:** `PGADMIN_EMAIL` (`pgadmin@admin.com`)
+   - **Password:** `PGADMIN_PASS` (`12345`)
+3. To add a database, click **Add New Server**:
+   - **Вкладка General:**
+     - **Name:** `SF-AI-DB` (any name)
+   - **Вкладка Connection:**
+     - **Host name/address:** `db` (name services PostgreSQL in the docker-network)
+     - **Port:** `5432`
+     - **Maintenance database:** `sf-ai-db` (value `POSTGRES_DB`)
+     - **Username:** `emran_developer` (value `POSTGRES_USER`)
+     - **Password:** `123456` (value `POSTGRES_PASSWORD`)
+4. Click **Save**.
+
+### 2. Connecting via a third-party GUI (DBeaver, DataGrip, Postico)
+
+If you want to connect to the database directly from your local machine via a third-party client, use the port forwarded through the `port forwarder`:
+
+- **Host:** `localhost` or `127.0.0.1`, (if db running in the docker + local `host.docker.internal`)
+- **Port:** `5433` (passed through socat port-forwarder)
+- **Database:** `sf-ai-db`
+- **Username:** `emran_developer`
+- **Password:** `qwert`
+
+---
+
 ## ✨ Features
 
 | Feature                      | Description                                                         |
@@ -71,7 +142,7 @@ Describe your project in plain text → StructFlow generates 3 ready-to-use dire
 
 | Technology     | Version | Purpose          |
 | -------------- | ------- | ---------------- |
-| **Go**         | 1.25    | Core language    |
+| **Go**         | 1.25.5  | Core language    |
 | **Fiber**      | v2      | HTTP framework   |
 | **PostgreSQL** | —       | Primary database |
 | **JWT**        | —       | Authentication   |
@@ -98,90 +169,6 @@ Describe your project in plain text → StructFlow generates 3 ready-to-use dire
 - **Node.js** `18+`
 - **PostgreSQL** `14+`
 - **Docker** (optional, recommended for up db, swagger)
-
----
-
-### Backend Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/structflow.git
-cd structflow/backend
-
-# Install dependencies
-go mod download
-
-# Copy environment config
-cp .env.example .env
-# Edit .env with your values
-
-# Run database migrations
-make migrate-up
-
-# Start the server
-make run
-# or
-go run cmd/main.go
-```
-
-**With Docker:**
-
-```bash
-cd backend
-docker compose up -d
-```
-
----
-
-### Frontend Setup
-
-```bash
-cd structflow/frontend
-
-# Install dependencies
-npm install
-
-# Start dev server
-npm start
-# Opens at http://localhost:4200
-
-# Build for production
-npm run build
-```
-
----
-
-### Environment Variables
-
-#### Backend `.env`
-
-```env
-# Server
-APP_PORT=3000
-CLIENT_URL=http://localhost:4200
-
-# Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=structflow
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_URL=db-url
-
-# AI-Provider
-API_AI_GEMINI_KEY=gemini-api-key
-API_AI_CLAUDE_KEY=claude-api-key
-API_AI_CHAT_GPT_KEY=gpt-api-key
-
-# Email-provider
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_EMAIL=email-sendler
-SMTP_PASSWORD=email-app-password
-
-# JWT
-JWT_SECRET=your_super_secret_key
-```
 
 ---
 

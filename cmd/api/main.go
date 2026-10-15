@@ -12,6 +12,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -274,8 +275,11 @@ func main() {
 		})
 	})
 
+	fmt.Println("!!!Config logs!!!")
+	fmt.Println(cfg.DBHost)
+
 	go func() {
-		if err := app.Listen(":" + cfg.AppPort); err != nil {
+		if err := app.Listen(cfg.Host + ":" + cfg.AppPort); err != nil {
 			log.Fatal(err)
 		}
 	}()

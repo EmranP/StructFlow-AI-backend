@@ -10,6 +10,7 @@ import (
 type Config struct {
 	ENV     string
 	AppPort string
+	Host    string
 
 	DBHost string
 	DBPort string
@@ -46,6 +47,7 @@ func Load() (*Config, error) {
 	return &Config{
 		ENV:       os.Getenv("ENV"),
 		AppPort:   os.Getenv("APP_PORT"),
+		Host:      os.Getenv("HOSTNAME"),
 		OriginUrl: os.Getenv("CLIENT_URL"),
 
 		DBHost: os.Getenv("DB_HOST"),

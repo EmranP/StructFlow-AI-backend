@@ -23,7 +23,7 @@ func CORS(cfg *configs.Config) fiber.Handler {
 
 			AllowHeaders: "Origin,Content-Type,Accept,Authorization",
 
-			AllowCredentials: true,
+			AllowCredentials: false,
 		},
 	)
 }
